@@ -6,6 +6,10 @@ struct SimpleWritingSessionView: View {
     @State private var text: String = ""
     @State private var isBackspaceBlocked = true
     @State private var timer: Timer?
+    @State private var showingAnalysis = false
+    @State private var analysisResult: AIAnalysisResult?
+    
+    private let aiService = AIAnalysisService()
     
     var body: some View {
         VStack(spacing: 20) {
@@ -95,14 +99,25 @@ struct SimpleWritingSessionView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isActive && text.isEmpty)
+                
+                if !text.isEmpty {
+                    Button("Analyze") {
+                        Task {
+                            await analyzeText()
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
             .padding()
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(NSColor.windowBackgroundColor))
-        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
-            // App became active
+        .sheet(isPresented: $showingAnalysis) {
+            if let result = analysisResult {
+                AnalysisResultView(result: result)
+            }
         }
     }
     
@@ -138,7 +153,6 @@ struct SimpleWritingSessionView: View {
         timer?.invalidate()
         timer = nil
         
-        // Here you would save the session
         print("Session completed with \(text.count) characters")
     }
     
@@ -149,6 +163,104 @@ struct SimpleWritingSessionView: View {
         timer = nil
         text = ""
         timeRemaining = 15 * 60
+    }
+    
+    private func analyzeText() async {
+        do {
+            analysisResult = try await aiService.analyzeText(text)
+            showingAnalysis = true
+        } catch {
+            print("Analysis failed: \(error)")
+        }
+    }
+}
+
+struct AnalysisResultView: View {
+    let result: AIAnalysisResult
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    // Mood Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Writing Mood")
+                            .font(.headline)
+                        Text(result.mood.rawValue.capitalized)
+                            .font(.title2)
+                            .foregroundColor(.blue)
+                    }
+                    
+                    // Stats Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Statistics")
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("Word Count:")
+                            Spacer()
+                            Text("\(result.wordCount)")
+                                .fontWeight(.semibold)
+                        }
+                        
+                        HStack {
+                            Text("Readability Score:")
+                            Spacer()
+                            Text(String(format: "%.1f", result.readabilityScore))
+                                .fontWeight(.semibold)
+                        }
+                    }
+                    
+                    // Themes Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Themes")
+                            .font(.headline)
+                        
+                        ForEach(result.themes, id: \.self) { theme in
+                            Text("• \(theme.capitalized)")
+                                .font(.body)
+                        }
+                    }
+                    
+                    // Insights Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Insights")
+                            .font(.headline)
+                        
+                        ForEach(result.insights, id: \.self) { insight in
+                            Text("• \(insight)")
+                                .font(.body)
+                        }
+                    }
+                    
+                    // Style Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Writing Style")
+                            .font(.headline)
+                        
+                        ForEach(result.style, id: \.self) { style in
+                            Text("• \(style)")
+                                .font(.body)
+                        }
+                    }
+                    
+                    // Suggestions Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Suggestions")
+                            .font(.headline)
+                        
+                        ForEach(result.suggestions, id: \.self) { suggestion in
+                            Text("• \(suggestion)")
+                                .font(.body)
+                                .foregroundColor(.blue)
+                        }
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("AI Analysis")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

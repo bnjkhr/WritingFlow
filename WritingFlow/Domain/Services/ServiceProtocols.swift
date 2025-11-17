@@ -1,4 +1,5 @@
 import Foundation
+import FoundationModels
 
 // MARK: - Timer Engine Service
 
