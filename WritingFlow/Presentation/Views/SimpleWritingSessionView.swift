@@ -226,10 +226,16 @@ struct AnalysisResultView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Insights")
                             .font(.headline)
-                        
-                        ForEach(result.insights, id: \.self) { insight in
-                            Text("• \(insight)")
-                                .font(.body)
+
+                        ForEach(result.insights, id: \.title) { insight in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("• \(insight.title)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                Text("  \(insight.description)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                     
