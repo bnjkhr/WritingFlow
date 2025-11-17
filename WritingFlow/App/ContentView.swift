@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingWritingSession = false
+    
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "pencil.and.outline")
@@ -17,13 +19,16 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
             
             Button("Start Writing Session") {
-                // TODO: Start writing session
+                showingWritingSession = true
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sheet(isPresented: $showingWritingSession) {
+            SimpleWritingSessionView()
+        }
     }
 }
 

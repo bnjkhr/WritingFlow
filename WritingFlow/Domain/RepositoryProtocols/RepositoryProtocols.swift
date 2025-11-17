@@ -1,11 +1,8 @@
 import Foundation
 
-// Import domain entities to resolve types
-// Note: These will be properly imported when Xcode project is set up
+// MARK: - Repository Protocols
 
-// MARK: - Writing Session Repository Protocol
-
-protocol WritingSessionRepositoryProtocol {
+public protocol WritingSessionRepositoryProtocol {
     func createSession(_ session: WritingSession) async throws
     func getSession(id: UUID) async throws -> WritingSession?
     func getAllSessions() async throws -> [WritingSession]
@@ -16,34 +13,27 @@ protocol WritingSessionRepositoryProtocol {
     func searchSessions(query: String) async throws -> [WritingSession]
 }
 
-// MARK: - AI Summary Repository Protocol
-
-protocol AISummaryRepositoryProtocol {
+public protocol AISummaryRepositoryProtocol {
     func createSummary(_ summary: AISummary) async throws
     func getSummary(id: UUID) async throws -> AISummary?
-    func getSummary(for sessionId: UUID) async throws -> AISummary?
-    func getAllSummaries() async throws -> [AISummary]
+    func getSummaries(for sessionId: UUID) async throws -> [AISummary]
     func updateSummary(_ summary: AISummary) async throws
     func deleteSummary(id: UUID) async throws
-    func getSummaries(from startDate: Date, to endDate: Date) async throws -> [AISummary]
+    func getRecentSummaries(limit: Int) async throws -> [AISummary]
 }
 
-// MARK: - Activity Event Repository Protocol
-
-protocol ActivityEventRepositoryProtocol {
-    func createEvent(_ event: ActivityEvent) async throws
+public protocol ActivityEventRepositoryProtocol {
+    func logEvent(_ event: ActivityEvent) async throws
     func getEvents(for sessionId: UUID) async throws -> [ActivityEvent]
-    func getAllEvents() async throws -> [ActivityEvent]
-    func deleteEvents(for sessionId: UUID) async throws
     func getEvents(from startDate: Date, to endDate: Date) async throws -> [ActivityEvent]
+    func deleteEvents(for sessionId: UUID) async throws
 }
 
-// MARK: - Text Content Repository Protocol
-
-protocol TextContentRepositoryProtocol {
+public protocol TextContentRepositoryProtocol {
     func saveContent(_ content: TextContent) async throws
-    func getContent(for sessionId: UUID) async throws -> TextContent?
-    func getAllContent() async throws -> [TextContent]
+    func getContent(id: UUID) async throws -> TextContent?
+    func getContent(for sessionId: UUID) async throws -> [TextContent]
+    func getLatestContent(for sessionId: UUID) async throws -> TextContent?
+    func deleteContent(id: UUID) async throws
     func deleteContent(for sessionId: UUID) async throws
-    func searchContent(query: String) async throws -> [TextContent]
 }
