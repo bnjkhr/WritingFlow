@@ -1,0 +1,105 @@
+# Xcode
+
+# Xcode workspace file
+*.xcworkspace/xcuserdata/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Swift Package Manager
+.swiftpm/
+build/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/
+
+# App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playground files
+timeline.xctimeline
+playground.xcworkspace
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+*.xcodeproj/project.xcworkspace/*
+!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!*.xcodeproj/project.xcworkspace/xcshareddata/
+
+# Bundle artifacts
+*.xcarchive
+
+# CocoaPods artifacts
+Pods/
+
+# Carthage artifacts
+Carthage/Build/
+
+# AppCode specific files
+.idea/
+
+# SwiftLint
+.swiftlint.yml
+
+# Documentation
+docs/
+
+# Backup files
+*.backup
+*.bak
+*.tmp
