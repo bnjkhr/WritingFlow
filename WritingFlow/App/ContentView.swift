@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingWritingSession = false
-    // @State private var showingHistory = false  // TODO: Add SessionHistoryView.swift to Xcode project
+    @State private var showingHistory = false
     @State private var isHovering = false
 
     var body: some View {
@@ -20,8 +20,6 @@ struct ContentView: View {
             .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // TODO: Re-enable History button after adding SessionHistoryView.swift to Xcode project
-                /*
                 // Top Bar with History Button
                 HStack {
                     Spacer()
@@ -52,7 +50,6 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, 30)
                 .padding(.top, 20)
-                */
 
                 Spacer()
 
@@ -159,12 +156,9 @@ struct ContentView: View {
             SimpleWritingSessionView()
                 .frame(minWidth: 900, minHeight: 650)
         }
-        // TODO: Re-enable after adding SessionHistoryView.swift to Xcode project
-        /*
         .sheet(isPresented: $showingHistory) {
             SessionHistoryView()
         }
-        */
     }
 }
 

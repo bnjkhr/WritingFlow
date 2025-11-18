@@ -9,8 +9,8 @@ final class SessionHistoryManager: ObservableObject {
 
     @Published var sessions: [SavedSession] = []
 
-    init(context: ModelContext = DataStoreManager.shared.context) {
-        self.context = context
+    init() {
+        self.context = DataStoreManager.shared.context
         loadSessions()
     }
 
@@ -23,8 +23,7 @@ final class SessionHistoryManager: ObservableObject {
         endTime: Date,
         wordCount: Int,
         characterCount: Int,
-        duration: TimeInterval,
-        analysisResult: AIAnalysisResult?
+        duration: TimeInterval
     ) {
         let entity = WritingSessionEntity(
             title: title.isEmpty ? "Session \(formatDate(startTime))" : title,
@@ -52,8 +51,9 @@ final class SessionHistoryManager: ObservableObject {
     }
 
     func deleteSession(_ session: SavedSession) {
+        let sessionId = session.id
         let descriptor = FetchDescriptor<WritingSessionEntity>(
-            predicate: #Predicate { $0.id == session.id }
+            predicate: #Predicate { $0.id == sessionId }
         )
 
         do {

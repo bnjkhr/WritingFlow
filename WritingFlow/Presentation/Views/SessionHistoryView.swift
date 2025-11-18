@@ -257,7 +257,6 @@ struct SessionDetailView: View {
                 .padding(24)
             }
             .navigationTitle(session.title)
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {

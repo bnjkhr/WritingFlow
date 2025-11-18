@@ -39,8 +39,10 @@
 		01000024 /* WritingSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000024 /* WritingSessionViewModel.swift */; };
 		01000025 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000025 /* HomeView.swift */; };
 		01000026 /* SimpleWritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000026 /* SimpleWritingSessionView.swift */; };
-		01000027 /* WritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000027 /* WritingSessionView.swift */; };
-		AD1817332ECC9EB20026072D /* icon_Writing.icon in Resources */ = {isa = PBXBuildFile; fileRef = AD1817322ECC9EB20026072D /* icon_Writing.icon */; };
+	01000027 /* WritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000027 /* WritingSessionView.swift */; };
+	01000028 /* SessionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000028 /* SessionHistoryView.swift */; };
+	01000029 /* SessionHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000029 /* SessionHistoryManager.swift */; };
+	AD1817332ECC9EB20026072D /* icon_Writing.icon in Resources */ = {isa = PBXBuildFile; fileRef = AD1817322ECC9EB20026072D /* icon_Writing.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,9 +78,11 @@
 		02000024 /* WritingSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionViewModel.swift; sourceTree = "<group>"; };
 		02000025 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		02000026 /* SimpleWritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWritingSessionView.swift; sourceTree = "<group>"; };
-		02000027 /* WritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionView.swift; sourceTree = "<group>"; };
-		03000001 /* WritingFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WritingFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD1817322ECC9EB20026072D /* icon_Writing.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon_Writing.icon; sourceTree = "<group>"; };
+	02000027 /* WritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionView.swift; sourceTree = "<group>"; };
+	02000028 /* SessionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryView.swift; sourceTree = "<group>"; };
+	02000029 /* SessionHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryManager.swift; sourceTree = "<group>"; };
+	03000001 /* WritingFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WritingFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+	AD1817322ECC9EB20026072D /* icon_Writing.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon_Writing.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,16 +186,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		05000010 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				02000025 /* HomeView.swift */,
-				02000026 /* SimpleWritingSessionView.swift */,
-				02000027 /* WritingSessionView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
+	05000010 /* Views */ = {
+		isa = PBXGroup;
+		children = (
+			02000025 /* HomeView.swift */,
+			02000026 /* SimpleWritingSessionView.swift */,
+			02000027 /* WritingSessionView.swift */,
+			02000028 /* SessionHistoryView.swift */,
+		);
+		path = Views;
+		sourceTree = "<group>";
+	};
 		05000011 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,22 +283,23 @@
 			path = SwiftData;
 			sourceTree = "<group>";
 		};
-		05000021 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				02000019 /* ActivityDetector.swift */,
-				0200001A /* AIAnalysisService.swift */,
-				0200001B /* BackspaceBlocker.swift */,
-				0200001C /* GetSessionHistoryUseCase.swift */,
-				0200001D /* SessionStateManager.swift */,
-				0200001E /* StartWritingSessionUseCase.swift */,
-				0200001F /* TextStatisticsService.swift */,
-				02000020 /* TimerEngine.swift */,
-				02000021 /* UpdateWritingSessionContentUseCase.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
+	05000021 /* Services */ = {
+		isa = PBXGroup;
+		children = (
+			02000019 /* ActivityDetector.swift */,
+			0200001A /* AIAnalysisService.swift */,
+			0200001B /* BackspaceBlocker.swift */,
+			0200001C /* GetSessionHistoryUseCase.swift */,
+			0200001D /* SessionStateManager.swift */,
+			02000029 /* SessionHistoryManager.swift */,
+			0200001E /* StartWritingSessionUseCase.swift */,
+			0200001F /* TextStatisticsService.swift */,
+			02000020 /* TimerEngine.swift */,
+			02000021 /* UpdateWritingSessionContentUseCase.swift */,
+		);
+		path = Services;
+		sourceTree = "<group>";
+	};
 		05000022 /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,12 +422,14 @@
 				01000022 /* TimerDisplay.swift in Sources */,
 				01000023 /* WritingEditor.swift in Sources */,
 				01000024 /* WritingSessionViewModel.swift in Sources */,
-				01000025 /* HomeView.swift in Sources */,
-				01000026 /* SimpleWritingSessionView.swift in Sources */,
-				01000027 /* WritingSessionView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+			01000025 /* HomeView.swift in Sources */,
+			01000026 /* SimpleWritingSessionView.swift in Sources */,
+			01000027 /* WritingSessionView.swift in Sources */,
+			01000028 /* SessionHistoryView.swift in Sources */,
+			01000029 /* SessionHistoryManager.swift in Sources */,
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
