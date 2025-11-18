@@ -45,7 +45,7 @@ All data is stored locally on your Mac. AI processing happens on-device using Ap
 
 ## License
 
-[License information to be added]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
