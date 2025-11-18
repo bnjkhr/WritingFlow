@@ -1,4 +1,78 @@
 import SwiftUI
+import AppKit
+
+// MARK: - Custom NSTextView for Backspace Blocking
+
+class BlockingTextView: NSTextView {
+    var isBackspaceBlocked: Bool = false
+    var onTextChange: ((String) -> Void)?
+
+    override func keyDown(with event: NSEvent) {
+        // Block backspace/delete when enabled
+        if isBackspaceBlocked {
+            let deleteKey: UInt16 = 51 // Backspace
+            let deleteForwardKey: UInt16 = 117 // Delete forward
+
+            if event.keyCode == deleteKey || event.keyCode == deleteForwardKey {
+                NSSound.beep()
+                return
+            }
+        }
+
+        super.keyDown(with: event)
+    }
+
+    override func didChangeText() {
+        super.didChangeText()
+        onTextChange?(string)
+    }
+}
+
+struct BlockingTextEditor: NSViewRepresentable {
+    @Binding var text: String
+    @Binding var isBackspaceBlocked: Bool
+    var isEnabled: Bool
+
+    func makeNSView(context: Context) -> NSScrollView {
+        let scrollView = NSTextView.scrollableTextView()
+        let textView = scrollView.documentView as! NSTextView
+
+        // Replace with our custom text view
+        let blockingTextView = BlockingTextView()
+        blockingTextView.isRichText = false
+        blockingTextView.font = .systemFont(ofSize: 18)
+        blockingTextView.textColor = .labelColor
+        blockingTextView.backgroundColor = .textBackgroundColor
+        blockingTextView.isAutomaticQuoteSubstitutionEnabled = false
+        blockingTextView.isAutomaticDashSubstitutionEnabled = false
+        blockingTextView.isAutomaticTextReplacementEnabled = false
+        blockingTextView.isAutomaticSpellingCorrectionEnabled = false
+        blockingTextView.isContinuousSpellCheckingEnabled = false
+        blockingTextView.onTextChange = { newText in
+            DispatchQueue.main.async {
+                text = newText
+            }
+        }
+
+        scrollView.documentView = blockingTextView
+
+        return scrollView
+    }
+
+    func updateNSView(_ scrollView: NSScrollView, context: Context) {
+        guard let textView = scrollView.documentView as? BlockingTextView else { return }
+
+        textView.isBackspaceBlocked = isBackspaceBlocked
+        textView.isEditable = isEnabled
+        textView.isSelectable = true
+
+        if textView.string != text {
+            textView.string = text
+        }
+    }
+}
+
+// MARK: - Simple Writing Session View
 
 struct SimpleWritingSessionView: View {
     @State private var isActive = false
@@ -11,6 +85,7 @@ struct SimpleWritingSessionView: View {
     @State private var isAnalyzing = false
     @State private var showStats = true
     @State private var startTime: Date?
+    @State private var showCompletionAlert = false
     @Environment(\.dismiss) private var dismiss
 
     private let aiService = AIAnalysisService()
@@ -49,6 +124,17 @@ struct SimpleWritingSessionView: View {
                 AnalysisResultView(result: result)
             }
         }
+        .alert("Session Complete!", isPresented: $showCompletionAlert) {
+            Button("OK") {
+                showCompletionAlert = false
+            }
+        } message: {
+            if !text.isEmpty {
+                Text("Great work! You wrote \(wordCount) words in this session. AI analysis is ready!")
+            } else {
+                Text("Session completed.")
+            }
+        }
     }
 
     // MARK: - Header View
@@ -74,7 +160,11 @@ struct SimpleWritingSessionView: View {
 
             Spacer()
 
-            Button(action: { showStats.toggle() }) {
+            Button(action: {
+                withAnimation {
+                    showStats.toggle()
+                }
+            }) {
                 Image(systemName: showStats ? "sidebar.right" : "sidebar.left")
                     .font(.title3)
             }
@@ -101,13 +191,13 @@ struct SimpleWritingSessionView: View {
                 .font(.system(size: 56, weight: .bold, design: .rounded))
                 .foregroundColor(timerColor)
                 .contentTransition(.numericText())
+                .animation(.default, value: timeRemaining)
 
             HStack(spacing: 8) {
                 Circle()
                     .fill(statusColor)
                     .frame(width: 8, height: 8)
                     .opacity(isActive ? 1 : 0.5)
-                    .animation(.easeInOut(duration: 1).repeatForever(autoreverses: true), value: isActive)
 
                 Text(statusText)
                     .font(.subheadline)
@@ -159,6 +249,13 @@ struct SimpleWritingSessionView: View {
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
+
+                    Spacer()
+
+                    Text("Words: \(wordCount)")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.blue)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
@@ -180,14 +277,12 @@ struct SimpleWritingSessionView: View {
                         .padding(20)
                 }
 
-                TextEditor(text: $text)
-                    .font(.system(size: 18, design: .default))
-                    .lineSpacing(8)
-                    .padding(20)
-                    .scrollContentBackground(.hidden)
-                    .background(Color(NSColor.textBackgroundColor))
-                    .disabled(!isActive)
-                    .opacity(isActive || !text.isEmpty ? 1 : 0.5)
+                BlockingTextEditor(
+                    text: $text,
+                    isBackspaceBlocked: $isBackspaceBlocked,
+                    isEnabled: isActive
+                )
+                .opacity(isActive || !text.isEmpty ? 1 : 0.5)
             }
         }
         .background(Color(NSColor.textBackgroundColor))
@@ -457,15 +552,21 @@ struct SimpleWritingSessionView: View {
                 timeRemaining = 15 * 60
             }
             isBackspaceBlocked = true
+        }
 
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                if timeRemaining > 0 {
-                    timeRemaining -= 1
+        // Create timer on main thread
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            Task { @MainActor in
+                if self.timeRemaining > 0 {
+                    self.timeRemaining -= 1
                 } else {
-                    completeSession()
+                    self.completeSession()
                 }
             }
         }
+
+        // Ensure timer runs even when scrolling
+        RunLoop.main.add(timer!, forMode: .common)
     }
 
     private func pauseSession() {
@@ -473,6 +574,7 @@ struct SimpleWritingSessionView: View {
             isActive = false
             timer?.invalidate()
             timer = nil
+            isBackspaceBlocked = false
         }
     }
 
@@ -484,8 +586,14 @@ struct SimpleWritingSessionView: View {
             timer = nil
         }
 
+        // Show completion alert
+        showCompletionAlert = true
+
+        // Auto-analyze if there's text
         if !text.isEmpty {
             Task {
+                // Small delay to show the alert first
+                try? await Task.sleep(nanoseconds: 500_000_000)
                 await analyzeText()
             }
         }
