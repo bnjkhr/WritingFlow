@@ -40,6 +40,7 @@
 		01000025 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000025 /* HomeView.swift */; };
 		01000026 /* SimpleWritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000026 /* SimpleWritingSessionView.swift */; };
 		01000027 /* WritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000027 /* WritingSessionView.swift */; };
+		AD1817332ECC9EB20026072D /* icon_Writing.icon in Resources */ = {isa = PBXBuildFile; fileRef = AD1817322ECC9EB20026072D /* icon_Writing.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		02000026 /* SimpleWritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWritingSessionView.swift; sourceTree = "<group>"; };
 		02000027 /* WritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionView.swift; sourceTree = "<group>"; };
 		03000001 /* WritingFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WritingFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD1817322ECC9EB20026072D /* icon_Writing.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon_Writing.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			children = (
 				05000002 /* WritingFlow */,
 				05000003 /* Products */,
+				AD1817322ECC9EB20026072D /* icon_Writing.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -373,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01000004 /* Preview Assets.xcassets in Resources */,
+				AD1817332ECC9EB20026072D /* icon_Writing.icon in Resources */,
 				01000003 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +546,7 @@
 		11000003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon_Writing;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WritingFlow/WritingFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -571,7 +575,7 @@
 		11000004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon_Writing;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WritingFlow/WritingFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;

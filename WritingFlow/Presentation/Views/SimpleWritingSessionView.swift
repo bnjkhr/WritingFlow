@@ -89,7 +89,8 @@ struct SimpleWritingSessionView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let aiService = AIAnalysisService()
-    private let historyManager = SessionHistoryManager()
+    // TODO: Re-enable after adding SessionHistoryManager.swift to Xcode project
+    // private let historyManager = SessionHistoryManager()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -587,6 +588,8 @@ struct SimpleWritingSessionView: View {
             timer = nil
         }
 
+        // TODO: Re-enable after adding SessionHistoryManager.swift to Xcode project
+        /*
         // Save session to history
         if !text.isEmpty, let start = startTime {
             let sessionTitle = "Session \(formatSessionDate(start))"
@@ -603,6 +606,7 @@ struct SimpleWritingSessionView: View {
                 analysisResult: analysisResult
             )
         }
+        */
 
         // Show completion alert
         showCompletionAlert = true
@@ -617,12 +621,15 @@ struct SimpleWritingSessionView: View {
         }
     }
 
+    // TODO: Re-enable after adding SessionHistoryManager.swift to Xcode project
+    /*
     private func formatSessionDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
+    */
 
     private func stopSession() {
         withAnimation(.spring(response: 0.3)) {
