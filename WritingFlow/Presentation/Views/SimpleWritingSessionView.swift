@@ -801,7 +801,6 @@ struct AnalysisResultView: View {
                 .padding(24)
             }
             .navigationTitle("AI Analysis")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {

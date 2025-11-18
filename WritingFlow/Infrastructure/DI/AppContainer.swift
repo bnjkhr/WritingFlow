@@ -50,9 +50,9 @@ final class AppContainer {
         startWritingSessionUseCase: startWritingSessionUseCase,
         updateWritingSessionContentUseCase: updateWritingSessionContentUseCase,
         aiAnalysisService: aiAnalysisService,
+        sessionStateManager: sessionStateManager,
         timerEngine: timerEngine,
         activityDetector: activityDetector,
-        backspaceBlocker: backspaceBlocker,
-        sessionStateManager: sessionStateManager
+        backspaceBlocker: backspaceBlocker
     )
 }
