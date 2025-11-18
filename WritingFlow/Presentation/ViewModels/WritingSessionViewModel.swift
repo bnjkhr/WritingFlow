@@ -14,23 +14,26 @@ final class WritingSessionViewModel: ObservableObject {
     
     private let startWritingSessionUseCase: StartWritingSessionUseCase
     private let updateWritingSessionContentUseCase: UpdateWritingSessionContentUseCase
+    private let sessionStateManager: SessionStateManager
     private let timerEngine: TimerEngine
     private let activityDetector: ActivityDetector
     private let backspaceBlocker: BackspaceBlocker
-    
+
     init(
         startWritingSessionUseCase: StartWritingSessionUseCase,
         updateWritingSessionContentUseCase: UpdateWritingSessionContentUseCase,
+        sessionStateManager: SessionStateManager,
         timerEngine: TimerEngine,
         activityDetector: ActivityDetector,
         backspaceBlocker: BackspaceBlocker
     ) {
         self.startWritingSessionUseCase = startWritingSessionUseCase
         self.updateWritingSessionContentUseCase = updateWritingSessionContentUseCase
+        self.sessionStateManager = sessionStateManager
         self.timerEngine = timerEngine
         self.activityDetector = activityDetector
         self.backspaceBlocker = backspaceBlocker
-        
+
         setupTimerObserver()
     }
     
