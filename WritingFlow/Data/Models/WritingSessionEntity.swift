@@ -47,3 +47,56 @@ final class WritingSessionEntity {
         self.totalPauseDuration = totalPauseDuration
     }
 }
+
+extension WritingSessionEntity {
+    convenience init(from session: WritingSession) {
+        self.init(
+            id: session.id,
+            title: session.title,
+            content: session.content,
+            startTime: session.startTime,
+            endTime: session.endTime,
+            duration: session.duration,
+            targetDuration: session.targetDuration,
+            stateRaw: session.state.rawValue,
+            wordCount: session.wordCount,
+            characterCount: session.characterCount,
+            averageTypingSpeed: session.averageTypingSpeed,
+            pauseCount: session.pauseCount,
+            totalPauseDuration: session.totalPauseDuration
+        )
+    }
+    
+    func update(from session: WritingSession) {
+        title = session.title
+        content = session.content
+        startTime = session.startTime
+        endTime = session.endTime
+        duration = session.duration
+        targetDuration = session.targetDuration
+        stateRaw = session.state.rawValue
+        wordCount = session.wordCount
+        characterCount = session.characterCount
+        averageTypingSpeed = session.averageTypingSpeed
+        pauseCount = session.pauseCount
+        totalPauseDuration = session.totalPauseDuration
+    }
+    
+    func toDomain() -> WritingSession {
+        WritingSession(
+            id: id,
+            title: title,
+            content: content,
+            startTime: startTime,
+            endTime: endTime,
+            duration: duration,
+            targetDuration: targetDuration,
+            state: SessionState(rawValue: stateRaw) ?? .notStarted,
+            wordCount: wordCount,
+            characterCount: characterCount,
+            averageTypingSpeed: averageTypingSpeed,
+            pauseCount: pauseCount,
+            totalPauseDuration: totalPauseDuration
+        )
+    }
+}

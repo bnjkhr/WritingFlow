@@ -26,7 +26,7 @@ final class BackspaceBlocker: ObservableObject {
         isBlockingEnabled = false
         
         // Clean up event monitoring
-        if let monitor = eventMonitor {
+        if eventMonitor != nil {
             // NSEvent.removeMonitor(monitor)
             eventMonitor = nil
         }

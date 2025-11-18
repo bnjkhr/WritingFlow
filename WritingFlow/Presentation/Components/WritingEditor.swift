@@ -34,7 +34,11 @@ struct WritingEditor: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 )
-                .onChange(of: text) { _, newValue in
+                .onChange(of: text) { oldValue, newValue in
+                    if isBackspaceBlocked && newValue.count < oldValue.count {
+                        text = oldValue
+                        return
+                    }
                     onTextChange(newValue)
                 }
         }
@@ -42,17 +46,10 @@ struct WritingEditor: View {
 }
 
 #Preview {
-    @State var text: String = "Start writing here..."
-    @State var isBlocked: Bool = true
-    
-    return VStack {
-        WritingEditor(
-            text: $text,
-            isBackspaceBlocked: $isBlocked,
-            onTextChange: { newText in
-                print("Text changed: \(newText)")
-            }
-        )
-        .padding()
-    }
+    WritingEditor(
+        text: .constant("Start writing here..."),
+        isBackspaceBlocked: .constant(true),
+        onTextChange: { _ in }
+    )
+    .padding()
 }

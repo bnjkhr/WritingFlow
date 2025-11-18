@@ -12,14 +12,14 @@ final class SessionStateManager: ObservableObject {
     
     func startSession(duration: TimeInterval? = nil) async throws -> WritingSession {
         // Check if there's already an active session
-        if let activeSession = try await sessionRepository.getActiveSession() {
+        if try await sessionRepository.getActiveSession() != nil {
             throw DomainError.sessionAlreadyActive
         }
         
         let targetDuration = duration ?? (15 * 60) // Default 15 minutes
         
         let newSession = WritingSession(
-            title: "Writing Session \(DateFormatter.short.string(from: Date()))",
+            title: "Writing Session \(DateFormatter.sessionTitle.string(from: Date()))",
             startTime: Date(),
             targetDuration: targetDuration,
             state: .active
@@ -171,4 +171,13 @@ final class SessionStateManager: ObservableObject {
         currentSession = session
         return session
     }
+}
+
+private extension DateFormatter {
+    static let sessionTitle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }

@@ -1,101 +1,24 @@
 import Foundation
 
-// MARK: - AI Summary Domain Entity
+// MARK: - Display Helpers for Domain Entities
 
-struct AISummary: Identifiable, Equatable {
-    let id: UUID
-    let sessionId: UUID
-    let summary: String
-    let insights: [WritingInsight]
-    let themes: [String]
-    let mood: WritingMood
-    let wordCount: Int
-    let averageSentenceLength: Double
-    let readabilityScore: Double
-    let generatedAt: Date
-    
-    init(
-        id: UUID = UUID(),
-        sessionId: UUID,
-        summary: String = "",
-        insights: [WritingInsight] = [],
-        themes: [String] = [],
-        mood: WritingMood = .neutral,
-        wordCount: Int = 0,
-        averageSentenceLength: Double = 0,
-        readabilityScore: Double = 0,
-        generatedAt: Date = Date()
-    ) {
-        self.id = id
-        self.sessionId = sessionId
-        self.summary = summary
-        self.insights = insights
-        self.themes = themes
-        self.mood = mood
-        self.wordCount = wordCount
-        self.averageSentenceLength = averageSentenceLength
-        self.readabilityScore = readabilityScore
-        self.generatedAt = generatedAt
-    }
-}
-
-// MARK: - Writing Insight
-
-struct WritingInsight: Identifiable, Equatable {
-    let id: UUID
-    let type: InsightType
-    let title: String
-    let description: String
-    let confidence: Double // 0.0 to 1.0
-    let actionable: Bool
-    let suggestions: [String]
-    
-    init(
-        id: UUID = UUID(),
-        type: InsightType,
-        title: String,
-        description: String,
-        confidence: Double,
-        actionable: Bool = false,
-        suggestions: [String] = []
-    ) {
-        self.id = id
-        self.type = type
-        self.title = title
-        self.description = description
-        self.confidence = confidence
-        self.actionable = actionable
-        self.suggestions = suggestions
-    }
-}
-
-// MARK: - Insight Type
-
-enum InsightType: String, CaseIterable, Equatable {
-    case productivity = "productivity"
-    case consistency = "consistency"
-    case creativity = "creativity"
-    case structure = "structure"
-    case vocabulary = "vocabulary"
-    case flow = "flow"
-    case mood = "mood"
-    
+extension InsightType {
     var displayName: String {
         switch self {
         case .productivity:
             return "Productivity"
-        case .consistency:
-            return "Consistency"
-        case .creativity:
-            return "Creativity"
+        case .style:
+            return "Style"
+        case .mood:
+            return "Mood"
         case .structure:
             return "Structure"
         case .vocabulary:
             return "Vocabulary"
         case .flow:
             return "Writing Flow"
-        case .mood:
-            return "Mood Analysis"
+        case .consistency:
+            return "Consistency"
         }
     }
     
@@ -103,34 +26,23 @@ enum InsightType: String, CaseIterable, Equatable {
         switch self {
         case .productivity:
             return "chart.line.uptrend.xyaxis"
-        case .consistency:
-            return "calendar.badge.clock"
-        case .creativity:
-            return "lightbulb"
+        case .style:
+            return "text.book.closed"
+        case .mood:
+            return "face.smiling"
         case .structure:
             return "list.bullet.rectangle"
         case .vocabulary:
-            return "text.book.closed"
+            return "textformat"
         case .flow:
             return "waveform.path"
-        case .mood:
-            return "face.smiling"
+        case .consistency:
+            return "calendar.badge.clock"
         }
     }
 }
 
-// MARK: - Writing Mood
-
-enum WritingMood: String, CaseIterable, Equatable {
-    case enthusiastic = "enthusiastic"
-    case focused = "focused"
-    case reflective = "reflective"
-    case creative = "creative"
-    case analytical = "analytical"
-    case neutral = "neutral"
-    case tired = "tired"
-    case stressed = "stressed"
-    
+extension WritingMood {
     var displayName: String {
         switch self {
         case .enthusiastic:
@@ -195,57 +107,21 @@ enum WritingMood: String, CaseIterable, Equatable {
     }
 }
 
-// MARK: - Activity Detection Domain Entity
-
-struct ActivityEvent: Identifiable, Equatable {
-    let id: UUID
-    let sessionId: UUID
-    let timestamp: Date
-    let type: ActivityType
-    let duration: TimeInterval
-    let metadata: [String: String]
-    
-    init(
-        id: UUID = UUID(),
-        sessionId: UUID,
-        timestamp: Date = Date(),
-        type: ActivityType,
-        duration: TimeInterval = 0,
-        metadata: [String: String] = [:]
-    ) {
-        self.id = id
-        self.sessionId = sessionId
-        self.timestamp = timestamp
-        self.type = type
-        self.duration = duration
-        self.metadata = metadata
-    }
-}
-
-// MARK: - Activity Type
-
-enum ActivityType: String, CaseIterable, Equatable {
-    case typing = "typing"
-    case pause = "pause"
-    case backspaceAttempt = "backspaceAttempt"
-    case idle = "idle"
-    case resume = "resume"
-    case completion = "completion"
-    
+extension ActivityType {
     var displayName: String {
         switch self {
         case .typing:
             return "Typing"
         case .pause:
             return "Pause"
-        case .backspaceAttempt:
-            return "Backspace Attempt"
+        case .backspace:
+            return "Backspace"
         case .idle:
             return "Idle"
-        case .resume:
-            return "Resume"
-        case .completion:
-            return "Completion"
+        case .focus:
+            return "Focus"
+        case .distraction:
+            return "Distraction"
         }
     }
 }

@@ -36,8 +36,14 @@ struct WritingSessionView: View {
             
             // Writing Editor
             WritingEditor(
-                text: .constant(viewModel.text),
-                isBackspaceBlocked: .constant(viewModel.isBackspaceBlocked),
+                text: Binding(
+                    get: { viewModel.text },
+                    set: { viewModel.text = $0 }
+                ),
+                isBackspaceBlocked: Binding(
+                    get: { viewModel.isBackspaceBlocked },
+                    set: { _ in }
+                ),
                 onTextChange: { newText in
                     Task {
                         await viewModel.updateText(newText)

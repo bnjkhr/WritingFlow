@@ -17,6 +17,29 @@
 		01000008 /* ServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000008 /* ServiceProtocols.swift */; };
 		01000009 /* UseCaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000009 /* UseCaseProtocols.swift */; };
 		01000010 /* DomainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000010 /* DomainConstants.swift */; };
+		01000011 /* ActivityEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000011 /* ActivityEventEntity.swift */; };
+		01000012 /* AISummaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000012 /* AISummaryEntity.swift */; };
+		01000013 /* TextContentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000013 /* TextContentEntity.swift */; };
+		01000014 /* WritingInsightEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000014 /* WritingInsightEntity.swift */; };
+		01000015 /* WritingSessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000015 /* WritingSessionEntity.swift */; };
+		01000016 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000016 /* DataStoreManager.swift */; };
+		01000017 /* WritingSessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000017 /* WritingSessionRepository.swift */; };
+		01000018 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000018 /* AppContainer.swift */; };
+		01000019 /* ActivityDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000019 /* ActivityDetector.swift */; };
+		0100001A /* AIAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001A /* AIAnalysisService.swift */; };
+		0100001B /* BackspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001B /* BackspaceBlocker.swift */; };
+		0100001C /* GetSessionHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001C /* GetSessionHistoryUseCase.swift */; };
+		0100001D /* SessionStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001D /* SessionStateManager.swift */; };
+		0100001E /* StartWritingSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001E /* StartWritingSessionUseCase.swift */; };
+		0100001F /* TextStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200001F /* TextStatisticsService.swift */; };
+		01000020 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000020 /* TimerEngine.swift */; };
+		01000021 /* UpdateWritingSessionContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000021 /* UpdateWritingSessionContentUseCase.swift */; };
+		01000022 /* TimerDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000022 /* TimerDisplay.swift */; };
+		01000023 /* WritingEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000023 /* WritingEditor.swift */; };
+		01000024 /* WritingSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000024 /* WritingSessionViewModel.swift */; };
+		01000025 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000025 /* HomeView.swift */; };
+		01000026 /* SimpleWritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000026 /* SimpleWritingSessionView.swift */; };
+		01000027 /* WritingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000027 /* WritingSessionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +53,29 @@
 		02000008 /* ServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocols.swift; sourceTree = "<group>"; };
 		02000009 /* UseCaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProtocols.swift; sourceTree = "<group>"; };
 		02000010 /* DomainConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConstants.swift; sourceTree = "<group>"; };
+		02000011 /* ActivityEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEventEntity.swift; sourceTree = "<group>"; };
+		02000012 /* AISummaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISummaryEntity.swift; sourceTree = "<group>"; };
+		02000013 /* TextContentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContentEntity.swift; sourceTree = "<group>"; };
+		02000014 /* WritingInsightEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingInsightEntity.swift; sourceTree = "<group>"; };
+		02000015 /* WritingSessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionEntity.swift; sourceTree = "<group>"; };
+		02000016 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
+		02000017 /* WritingSessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionRepository.swift; sourceTree = "<group>"; };
+		02000018 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		02000019 /* ActivityDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetector.swift; sourceTree = "<group>"; };
+		0200001A /* AIAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAnalysisService.swift; sourceTree = "<group>"; };
+		0200001B /* BackspaceBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackspaceBlocker.swift; sourceTree = "<group>"; };
+		0200001C /* GetSessionHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSessionHistoryUseCase.swift; sourceTree = "<group>"; };
+		0200001D /* SessionStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStateManager.swift; sourceTree = "<group>"; };
+		0200001E /* StartWritingSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWritingSessionUseCase.swift; sourceTree = "<group>"; };
+		0200001F /* TextStatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStatisticsService.swift; sourceTree = "<group>"; };
+		02000020 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
+		02000021 /* UpdateWritingSessionContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWritingSessionContentUseCase.swift; sourceTree = "<group>"; };
+		02000022 /* TimerDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDisplay.swift; sourceTree = "<group>"; };
+		02000023 /* WritingEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingEditor.swift; sourceTree = "<group>"; };
+		02000024 /* WritingSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionViewModel.swift; sourceTree = "<group>"; };
+		02000025 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		02000026 /* SimpleWritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWritingSessionView.swift; sourceTree = "<group>"; };
+		02000027 /* WritingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSessionView.swift; sourceTree = "<group>"; };
 		03000001 /* WritingFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WritingFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -136,6 +182,9 @@
 		05000010 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02000025 /* HomeView.swift */,
+				02000026 /* SimpleWritingSessionView.swift */,
+				02000027 /* WritingSessionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +192,7 @@
 		05000011 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				02000024 /* WritingSessionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -150,6 +200,8 @@
 		05000012 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				02000022 /* TimerDisplay.swift */,
+				02000023 /* WritingEditor.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -198,6 +250,11 @@
 		05000018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				02000011 /* ActivityEventEntity.swift */,
+				02000012 /* AISummaryEntity.swift */,
+				02000013 /* TextContentEntity.swift */,
+				02000014 /* WritingInsightEntity.swift */,
+				02000015 /* WritingSessionEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -205,6 +262,7 @@
 		05000019 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				02000017 /* WritingSessionRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -212,6 +270,7 @@
 		05000020 /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
+				02000016 /* DataStoreManager.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -219,6 +278,15 @@
 		05000021 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				02000019 /* ActivityDetector.swift */,
+				0200001A /* AIAnalysisService.swift */,
+				0200001B /* BackspaceBlocker.swift */,
+				0200001C /* GetSessionHistoryUseCase.swift */,
+				0200001D /* SessionStateManager.swift */,
+				0200001E /* StartWritingSessionUseCase.swift */,
+				0200001F /* TextStatisticsService.swift */,
+				02000020 /* TimerEngine.swift */,
+				02000021 /* UpdateWritingSessionContentUseCase.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,6 +294,7 @@
 		05000022 /* DI */ = {
 			isa = PBXGroup;
 			children = (
+				02000018 /* AppContainer.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -323,6 +392,29 @@
 				01000008 /* ServiceProtocols.swift in Sources */,
 				01000009 /* UseCaseProtocols.swift in Sources */,
 				01000010 /* DomainConstants.swift in Sources */,
+				01000011 /* ActivityEventEntity.swift in Sources */,
+				01000012 /* AISummaryEntity.swift in Sources */,
+				01000013 /* TextContentEntity.swift in Sources */,
+				01000014 /* WritingInsightEntity.swift in Sources */,
+				01000015 /* WritingSessionEntity.swift in Sources */,
+				01000016 /* DataStoreManager.swift in Sources */,
+				01000017 /* WritingSessionRepository.swift in Sources */,
+				01000018 /* AppContainer.swift in Sources */,
+				01000019 /* ActivityDetector.swift in Sources */,
+				0100001A /* AIAnalysisService.swift in Sources */,
+				0100001B /* BackspaceBlocker.swift in Sources */,
+				0100001C /* GetSessionHistoryUseCase.swift in Sources */,
+				0100001D /* SessionStateManager.swift in Sources */,
+				0100001E /* StartWritingSessionUseCase.swift in Sources */,
+				0100001F /* TextStatisticsService.swift in Sources */,
+				01000020 /* TimerEngine.swift in Sources */,
+				01000021 /* UpdateWritingSessionContentUseCase.swift in Sources */,
+				01000022 /* TimerDisplay.swift in Sources */,
+				01000023 /* WritingEditor.swift in Sources */,
+				01000024 /* WritingSessionViewModel.swift in Sources */,
+				01000025 /* HomeView.swift in Sources */,
+				01000026 /* SimpleWritingSessionView.swift in Sources */,
+				01000027 /* WritingSessionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

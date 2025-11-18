@@ -1,7 +1,7 @@
 import Foundation
 
 @MainActor
-final class StartWritingSessionUseCase {
+final class StartWritingSessionUseCaseImplementation: StartWritingSessionUseCase {
     private let sessionStateManager: SessionStateManager
     private let timerEngine: TimerEngine
     private let activityDetector: ActivityDetector
@@ -20,18 +20,10 @@ final class StartWritingSessionUseCase {
     }
     
     func execute(duration: TimeInterval? = nil) async throws -> WritingSession {
-        // Start the session
         let session = try await sessionStateManager.startSession(duration: duration)
-        
-        // Start the timer
         timerEngine.start(duration: session.targetDuration)
-        
-        // Start activity detection
         activityDetector.startActivityDetection(for: session.id)
-        
-        // Enable backspace blocking
         backspaceBlocker.enableBlocking()
-        
         return session
     }
 }

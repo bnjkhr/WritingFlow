@@ -1,9 +1,8 @@
 import Foundation
-import FoundationModels
 
 // MARK: - Domain Entities
 
-public struct WritingSession {
+public struct WritingSession: Identifiable, Equatable {
     public let id: UUID
     public var title: String
     public var content: String
@@ -47,6 +46,12 @@ public struct WritingSession {
         self.pauseCount = pauseCount
         self.totalPauseDuration = totalPauseDuration
     }
+    
+    public var isActive: Bool { state.isActive }
+    public var isPaused: Bool { state.isPaused }
+    public var isCompleted: Bool { state.isCompleted }
+    public var isCancelled: Bool { state.isCancelled }
+    public var isFinished: Bool { state.isFinished }
 }
 
 public enum SessionState: String, CaseIterable, Codable {
@@ -77,7 +82,7 @@ public enum SessionState: String, CaseIterable, Codable {
     }
 }
 
-public struct AISummary {
+public struct AISummary: Identifiable, Equatable {
     public let id: UUID
     public let sessionId: UUID
     public let summary: String
@@ -114,7 +119,7 @@ public struct AISummary {
     }
 }
 
-public struct WritingInsight {
+public struct WritingInsight: Identifiable, Equatable {
     public let id: UUID
     public let type: InsightType
     public let title: String
@@ -163,7 +168,7 @@ public enum WritingMood: String, CaseIterable, Codable {
     case stressed = "stressed"
 }
 
-public struct ActivityEvent {
+public struct ActivityEvent: Identifiable, Equatable {
     public let id: UUID
     public let sessionId: UUID
     public let timestamp: Date
@@ -197,7 +202,7 @@ public enum ActivityType: String, CaseIterable, Codable {
     case distraction = "distraction"
 }
 
-public struct TextContent {
+public struct TextContent: Identifiable, Equatable {
     public let id: UUID
     public let sessionId: UUID
     public let content: String
@@ -230,7 +235,7 @@ public struct TextContent {
     }
 }
 
-public struct TimerState {
+public struct TimerState: Equatable {
     public let remainingTime: TimeInterval
     public let isRunning: Bool
     public let isPaused: Bool

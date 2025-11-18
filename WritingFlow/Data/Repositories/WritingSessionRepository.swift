@@ -5,27 +5,12 @@ import SwiftData
 final class WritingSessionRepository: WritingSessionRepositoryProtocol {
     private let context: ModelContext
     
-    init(context: ModelContext = DataStoreManager.shared.context) {
+    init(context: ModelContext) {
         self.context = context
     }
     
     func createSession(_ session: WritingSession) async throws {
-        let entity = WritingSessionEntity(
-            id: session.id,
-            title: session.title,
-            content: session.content,
-            startTime: session.startTime,
-            endTime: session.endTime,
-            duration: session.duration,
-            targetDuration: session.targetDuration,
-            stateRaw: session.state.rawValue,
-            wordCount: session.wordCount,
-            characterCount: session.characterCount,
-            averageTypingSpeed: session.averageTypingSpeed,
-            pauseCount: session.pauseCount,
-            totalPauseDuration: session.totalPauseDuration
-        )
-        
+        let entity = WritingSessionEntity(from: session)
         context.insert(entity)
         try context.save()
     }
@@ -52,8 +37,9 @@ final class WritingSessionRepository: WritingSessionRepositoryProtocol {
     }
     
     func getActiveSession() async throws -> WritingSession? {
+        let activeState = SessionState.active.rawValue
         let descriptor = FetchDescriptor<WritingSessionEntity>(
-            predicate: #Predicate { $0.stateRaw == SessionState.active.rawValue }
+            predicate: #Predicate { $0.stateRaw == activeState }
         )
         
         guard let entity = try context.fetch(descriptor).first else {
@@ -64,24 +50,16 @@ final class WritingSessionRepository: WritingSessionRepositoryProtocol {
     }
     
     func updateSession(_ session: WritingSession) async throws {
+        let targetId = session.id
         let descriptor = FetchDescriptor<WritingSessionEntity>(
-            predicate: #Predicate { $0.id == session.id }
+            predicate: #Predicate { $0.id == targetId }
         )
         
         guard let entity = try context.fetch(descriptor).first else {
             throw DomainError.sessionNotFound(session.id)
         }
         
-        entity.title = session.title
-        entity.content = session.content
-        entity.endTime = session.endTime
-        entity.duration = session.duration
-        entity.stateRaw = session.state.rawValue
-        entity.wordCount = session.wordCount
-        entity.characterCount = session.characterCount
-        entity.averageTypingSpeed = session.averageTypingSpeed
-        entity.pauseCount = session.pauseCount
-        entity.totalPauseDuration = session.totalPauseDuration
+        entity.update(from: session)
         
         try context.save()
     }

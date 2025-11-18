@@ -9,7 +9,13 @@ final class DataStoreManager {
     
     lazy var container: ModelContainer = {
         do {
-            return try ModelContainer(for: WritingSessionEntity.self)
+            return try ModelContainer(
+                for: WritingSessionEntity.self,
+                     ActivityEventEntity.self,
+                     AISummaryEntity.self,
+                     TextContentEntity.self,
+                     WritingInsightEntity.self
+            )
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
