@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingWritingSession = false
+    @State private var showingHistory = false
     @State private var isHovering = false
 
     var body: some View {
@@ -18,7 +19,38 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
 
-            VStack(spacing: 40) {
+            VStack(spacing: 0) {
+                // Top Bar with History Button
+                HStack {
+                    Spacer()
+
+                    Button(action: {
+                        showingHistory = true
+                    }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "clock.arrow.circlepath")
+                                .font(.title3)
+                            Text("History")
+                                .fontWeight(.medium)
+                        }
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(
+                            Capsule()
+                                .fill(Color(NSColor.controlBackgroundColor))
+                                .opacity(0.8)
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, 30)
+                .padding(.top, 20)
+
                 Spacer()
 
                 // App Icon and Branding
@@ -114,13 +146,18 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                 }
                 .padding(.bottom, 20)
+
+                Spacer()
             }
-            .padding(40)
+            .padding(.horizontal, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $showingWritingSession) {
             SimpleWritingSessionView()
                 .frame(minWidth: 900, minHeight: 650)
+        }
+        .sheet(isPresented: $showingHistory) {
+            SessionHistoryView()
         }
     }
 }

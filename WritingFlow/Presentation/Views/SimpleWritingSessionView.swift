@@ -89,6 +89,7 @@ struct SimpleWritingSessionView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let aiService = AIAnalysisService()
+    private let historyManager = SessionHistoryManager()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -586,6 +587,23 @@ struct SimpleWritingSessionView: View {
             timer = nil
         }
 
+        // Save session to history
+        if !text.isEmpty, let start = startTime {
+            let sessionTitle = "Session \(formatSessionDate(start))"
+            let duration = Date().timeIntervalSince(start)
+
+            historyManager.saveSession(
+                title: sessionTitle,
+                content: text,
+                startTime: start,
+                endTime: Date(),
+                wordCount: wordCount,
+                characterCount: characterCount,
+                duration: duration,
+                analysisResult: analysisResult
+            )
+        }
+
         // Show completion alert
         showCompletionAlert = true
 
@@ -597,6 +615,13 @@ struct SimpleWritingSessionView: View {
                 await analyzeText()
             }
         }
+    }
+
+    private func formatSessionDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 
     private func stopSession() {

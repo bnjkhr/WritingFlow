@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct WritingFlowApp: App {
@@ -6,5 +7,6 @@ struct WritingFlowApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(DataStoreManager.shared.container)
     }
 }
