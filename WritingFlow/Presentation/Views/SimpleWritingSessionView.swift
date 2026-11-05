@@ -126,13 +126,13 @@ struct SimpleWritingSessionView: View {
                 AnalysisResultView(result: result)
             }
         }
-        .alert("Session Complete!", isPresented: $showCompletionAlert) {
+        .alert("Session complete", isPresented: $showCompletionAlert) {
             Button("OK") {
                 showCompletionAlert = false
             }
         } message: {
             if !text.isEmpty {
-                Text("Great work! You wrote \(wordCount) words in this session. AI analysis is ready!")
+                Text("You wrote \(wordCount) words in this session. AI analysis is ready.")
             } else {
                 Text("Session completed.")
             }
@@ -433,7 +433,7 @@ struct SimpleWritingSessionView: View {
                     Image(systemName: "sparkles")
                         .foregroundColor(.yellow)
                         .font(.caption)
-                    Text("Keep going!")
+                    Text("Keep going")
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -532,15 +532,15 @@ struct SimpleWritingSessionView: View {
     private var motivationalMessage: String {
         switch wordCount {
         case 0..<50:
-            return "Great start! Keep the momentum going."
+            return "Good start. Keep writing."
         case 50..<100:
-            return "You're doing amazing! Half way there."
+            return "Over 50 words. Keep going."
         case 100..<200:
-            return "Excellent progress! Your ideas are flowing."
+            return "Over 100 words."
         case 200..<500:
-            return "Outstanding work! You're on fire!"
+            return "Over 200 words. Steady work."
         default:
-            return "Incredible! You're a writing machine!"
+            return "Over 500 words."
         }
     }
 
